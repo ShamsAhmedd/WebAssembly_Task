@@ -80,6 +80,8 @@ emcc quick.c -o quick.js \-s EXPORTED_FUNCTIONS="['_quick_sort']" \-s EXPORTED_R
 ## Expected Results
 
 -For small array sizes, JavaScript performance may be similar
+
 -For large array sizes, WebAssembly often shows better or more stable execution time
+
 -Demonstrates why WebAssembly is suitable for CPU-intensive tasks
 
