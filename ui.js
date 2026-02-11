@@ -1,8 +1,22 @@
+function getArraySize() {
+  const sizeInput = document.getElementById("size");
+  const errorEl = document.getElementById("error");
+  let size = parseInt(sizeInput.value) || 0;
+
+  if (size > 50000) {
+    errorEl.innerText = "Maximum allowed value is 50000!";
+    return null;
+  } else {
+    errorEl.innerText = "";
+    return size;
+  }
+}
 // Run quick Sort in JS
 function runJS() {
-  const size = parseInt(document.getElementById("size").value);
-  const arr = Array.from({length: size}, () => Math.floor(Math.random() * 1000));
+  const size = getArraySize();
+  if (!size) return;
 
+  const arr = Array.from({length: size}, () => Math.floor(Math.random() * 1000));
   let start = performance.now();
   quickSortJS(arr);
   let end = performance.now();
@@ -15,19 +29,18 @@ function runJS() {
 
 // Run quick Sort in WebAssembly
 function runWASM() {
-  const size = parseInt(document.getElementById("size").value);
+  const size = getArraySize();
+  if (!size) return;
+
   const arr = Array.from({length: size}, () => Math.floor(Math.random() * 1000));
-
+  
   let start = performance.now();
-
-  // Call WASM quick Sort
   Module.ccall(
-    'quick_sort',         // اسم الدالة في C
-    null,                  // return type
-    ['array', 'number'],   // types of args
-    [arr, arr.length]      // values
+    'quick_sort',       // function name in c
+    null,               // return type
+    ['array', 'number'],// types of args
+    [arr, arr.length]   // values
   );
-
   let end = performance.now();
 
   document.getElementById("time").innerText =

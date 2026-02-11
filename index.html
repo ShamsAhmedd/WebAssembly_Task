@@ -4,12 +4,16 @@
   <meta charset="UTF-8">
   <title>Quick Sort JS vs WASM</title>
   <link rel="stylesheet" href="style.css">
+  <style>
+    #error { color: red; margin-top: 5px; }
+  </style>
 </head>
 <body>
 <h1>Quick Sort Comparison</h1>
 
-<p>Enter the maximum value for the randomly generated array elements:</p>
-<input type="number" id="size" placeholder="Array Size" value="1000">
+<p>Enter the maximum value for the randomly generated array elements (≤ 50000):</p>
+<input type="number" id="size" value="1000" max="50000">
+<p id="error"></p>
 
 <div class="buttons">
   <button onclick="runJS()">Sort with JavaScript</button>
@@ -24,5 +28,4 @@
 <script src="quick.js"></script>
 <script src="quick_sort.js"></script>
 <script src="ui.js"></script>
-</body>
-</html>
+
